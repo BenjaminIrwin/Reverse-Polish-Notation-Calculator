@@ -5,8 +5,7 @@ import org.junit.Test;
 import java.util.Stack;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 public class CalculatorTest {
 
@@ -22,23 +21,15 @@ public class CalculatorTest {
   }
 
   @Test
-  public void storeFiveAndRemoveTwo() {
+  public void storeThreeAndAllClear() {
     Calculator calc = new Calculator();
     calc.store(24);
     calc.store(30);
     calc.store(33);
-    calc.store(-1);
-    calc.store(2);
 
-    calc.apply("UNDO");
-    calc.apply("UNDO");
+    calc.apply("AC");
 
-    Stack<Integer> stack = new Stack<Integer>();
-    stack.push(24);
-    stack.push(30);
-    stack.push(33);
-
-    assertEquals(stack, calc.getNumbersEntered());
+    assertTrue(calc.isEmpty());
   }
 
   @Test
@@ -86,7 +77,7 @@ public class CalculatorTest {
   }
 
   @Test
-  public void AddSubtractDivideMultiply() {
+  public void addSubtractDivideMultiply() {
     Calculator calc = new Calculator();
     calc.store(15);
     calc.store(7);
@@ -100,5 +91,6 @@ public class CalculatorTest {
 
     assertEquals(9, calc.getTop());
   }
+
 
 }

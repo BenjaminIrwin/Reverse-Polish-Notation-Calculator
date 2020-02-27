@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 
 public class UI {
 
-  String[] signs = {"+", "-", "/", "x"};
+  String[] signs = {"+", "-", "/", "x", "AC"};
   Calculator calc = new Calculator();
 
   private void display() {
@@ -33,7 +33,14 @@ public class UI {
       button.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-         calc.apply(s);
+          calc.apply(s);
+          if(s == "AC") {
+            textField.setText(".");
+          } else {
+            textField.setText(Integer.toString(calc.getTop()));
+
+          }
+
         }
       });
 
@@ -54,6 +61,7 @@ public class UI {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
           calc.store(finalN);
+          textField.setText(Integer.toString(calc.getTop()));
         //(number);
         }
       });

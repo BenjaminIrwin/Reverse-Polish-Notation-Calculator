@@ -12,6 +12,9 @@ public class Calculator {
 
   public void apply(String sign) {
 
+    if(isEmpty() || numbersEntered.size() == 1)
+      return;
+
     if (sign == "+") {
 
       numbersEntered.push(numbersEntered.pop() + numbersEntered.pop());
@@ -33,9 +36,9 @@ public class Calculator {
 
       numbersEntered.push(numbersEntered.pop() * numbersEntered.pop());
 
-    } else if (sign == "UNDO") {
+    } else if (sign == "AC") {
 
-      numbersEntered.pop();
+      numbersEntered.clear();
 
     }
   }
@@ -50,6 +53,10 @@ public class Calculator {
 
   public void remove() {
     numbersEntered.pop();
+  }
+
+  public boolean isEmpty() {
+    return numbersEntered.isEmpty();
   }
 
 }
