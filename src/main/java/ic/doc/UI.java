@@ -17,6 +17,32 @@ public class UI {
     JTextField textField = new JTextField(10);
     panel.add(textField);
 
+    makeNumberButtons(panel, textField);
+    makeSignButtons(panel, textField);
+
+    frame.add(panel);
+    frame.setVisible(true);
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+  }
+
+  private void makeSignButtons(JPanel panel, JTextField textField) {
+    for(String s : signs) {
+      JButton button = new JButton(s);
+
+      button.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent actionEvent) {
+         Calculator.apply(s);
+        }
+      });
+
+      panel.add(button);
+
+    }
+  }
+
+  private void makeNumberButtons(JPanel panel, JTextField textField) {
+
     for(int n = 1; n <= 9; n++)
     {
       String number = Integer.toString(n);
@@ -25,28 +51,12 @@ public class UI {
       button.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-          textField.setText(number);
+          Calculator.store(number);
         //(number);
         }
       });
       panel.add(button);
     }
-
-    JButton addition = new JButton("+");
-    addition.addActionListener(new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent actionEvent) {
-
-      }
-    });
-    panel.add(new JButton("+"));
-    panel.add(new JButton("-"));
-    panel.add(new JButton("x"));
-    panel.add(new JButton("/"));
-
-    frame.add(panel);
-    frame.setVisible(true);
-    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
   }
 
   public static void main(String[] args) {

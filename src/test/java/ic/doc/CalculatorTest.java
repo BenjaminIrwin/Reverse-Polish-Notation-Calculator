@@ -2,7 +2,7 @@ package ic.doc;
 
 import org.junit.Test;
 
-public class PolishCalcTest {
+public class CalculatorTest {
 
   @Test
 
