@@ -4,22 +4,38 @@ import java.util.Stack;
 
 public class Calculator {
 
-  private Stack<Integer> stack = new Stack<Integer>();
+  private Stack<Integer> numbersEntered = new Stack<Integer>();
 
   public void store(int number) {
-    stack.push(number);
+    numbersEntered.push(number);
   }
 
-  public int apply(String sign) {
-    return 1;
+  public void apply(String sign) {
+    if(sign == "+") {
+      numbersEntered.push(numbersEntered.pop() + numbersEntered.pop());
+    } else if(sign == "-") {
+      numbersEntered.push(numbersEntered.pop() - numbersEntered.pop());
+    }else if(sign == "/") {
+      int denominator = numbersEntered.pop();
+      int numerator = numbersEntered.pop();
+      numbersEntered.push(numerator/denominator);
+    } else if(sign == "x") {
+      numbersEntered.push(numbersEntered.pop() * numbersEntered.pop());
+    } else if(sign == "UNDO") {
+      numbersEntered.pop();
+    }
   }
 
-  public Stack<Integer> getStack() {
-    return stack;
+  public Stack<Integer> getNumbersEntered() {
+    return numbersEntered;
+  }
+
+  public int getTop() {
+    return numbersEntered.peek();
   }
 
   public void remove() {
-    stack.pop();
+    numbersEntered.pop();
   }
 
 }
