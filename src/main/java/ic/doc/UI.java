@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 public class UI {
 
   String[] signs = {"+", "-", "/", "x"};
+  Calculator calc = new Calculator();
 
   private void display() {
     JFrame frame = new JFrame("Example App");
@@ -32,7 +33,7 @@ public class UI {
       button.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-         Calculator.apply(s);
+         calc.apply(s);
         }
       });
 
@@ -48,10 +49,11 @@ public class UI {
       String number = Integer.toString(n);
 
       JButton button = new JButton(number);
+      int finalN = n;
       button.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-          Calculator.store(number);
+          calc.store(finalN);
         //(number);
         }
       });
