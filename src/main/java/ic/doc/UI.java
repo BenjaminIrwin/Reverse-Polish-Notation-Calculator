@@ -7,40 +7,32 @@ import java.awt.event.ActionListener;
 public class UI {
 
   String[] signs = {"+", "-", "/", "x", "AC"};
-  Calculator calc = new Calculator();
+  JTextField textField = new JTextField(10);
 
-  private void display() {
+  public void display() {
     JFrame frame = new JFrame("Example App");
-    frame.setSize(300,200);
+    frame.setSize(300, 200);
 
     JPanel panel = new JPanel();
 
-    JTextField textField = new JTextField(10);
     panel.add(textField);
 
-    makeNumberButtons(panel, textField);
-    makeSignButtons(panel, textField);
+    makeNumberButtons(panel);
+    makeSignButtons(panel);
 
     frame.add(panel);
     frame.setVisible(true);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
   }
 
-  private void makeSignButtons(JPanel panel, JTextField textField) {
-    for(String s : signs) {
+  private void makeSignButtons(JPanel panel) {
+    for (String s : signs) {
       JButton button = new JButton(s);
 
       button.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
           calc.apply(s);
-          if(s == "AC") {
-            textField.setText(".");
-          } else {
-            textField.setText(Integer.toString(calc.getTop()));
-
-          }
-
         }
       });
 
@@ -49,10 +41,9 @@ public class UI {
     }
   }
 
-  private void makeNumberButtons(JPanel panel, JTextField textField) {
+  private void makeNumberButtons(JPanel panel) {
 
-    for(int n = 1; n <= 9; n++)
-    {
+    for (int n = 1; n <= 9; n++) {
       String number = Integer.toString(n);
 
       JButton button = new JButton(number);
@@ -61,16 +52,16 @@ public class UI {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
           calc.store(finalN);
-          textField.setText(Integer.toString(calc.getTop()));
-        //(number);
         }
       });
+
       panel.add(button);
+
     }
   }
 
-  public static void main(String[] args) {
-    new UI().display();
+  public void updateUI(String numberToDisplay) {
+    textField.setText(numberToDisplay);
   }
 
 }

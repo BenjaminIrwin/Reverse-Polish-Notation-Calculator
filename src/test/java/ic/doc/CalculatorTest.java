@@ -92,5 +92,25 @@ public class CalculatorTest {
     assertEquals(9, calc.getTop());
   }
 
+  @Test
+  public void arithmeticWithStackSizeZeroAndOneDoesNothing() {
+    Calculator calc = new Calculator();
+
+    calc.apply("+");
+    calc.apply("-");
+    calc.apply("/");
+    calc.apply("x");
+    calc.store(3);
+    calc.apply("+");
+    calc.apply("-");
+    calc.apply("/");
+    calc.apply("x");
+
+    Stack<Integer> stack = new Stack<>();
+    stack.push(3);
+
+    assertEquals(stack, calc.getNumbersEntered());
+
+  }
 
 }

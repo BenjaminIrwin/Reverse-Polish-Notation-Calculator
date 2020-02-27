@@ -5,6 +5,7 @@ import java.util.Stack;
 public class Calculator {
 
   private Stack<Integer> numbersEntered = new Stack<Integer>();
+  public UI ui = new UI();
 
   public void store(int number) {
     numbersEntered.push(number);
@@ -39,8 +40,11 @@ public class Calculator {
     } else if (sign == "AC") {
 
       numbersEntered.clear();
+      calculatorUI.updateUI(".");
 
     }
+
+    calculatorUI.updateUI(Integer.toString(numbersEntered.peek()));
   }
 
   public Stack<Integer> getNumbersEntered() {
