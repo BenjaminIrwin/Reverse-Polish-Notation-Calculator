@@ -53,6 +53,17 @@ public class CalculatorTest {
   }
 
   @Test
+  public void subtractWithTwoValues() {
+    Calculator calc = new Calculator();
+    calc.store(60);
+    calc.store(30);
+
+    calc.apply("-");
+
+    assertEquals(30, calc.getTop());
+  }
+
+  @Test
   public void multiplyTwoValues() {
     Calculator calc = new Calculator();
     calc.store(24);
@@ -64,7 +75,7 @@ public class CalculatorTest {
   }
 
   @Test
-  public void divide() {
+  public void divideWithTwoValues() {
     Calculator calc = new Calculator();
     calc.store(24);
     calc.store(2);
@@ -72,6 +83,22 @@ public class CalculatorTest {
     calc.apply("/");
 
     assertEquals(12, calc.getTop());
+  }
+
+  @Test
+  public void AddSubtractDivideMultiply() {
+    Calculator calc = new Calculator();
+    calc.store(15);
+    calc.store(7);
+    calc.store(1);
+    calc.store(1);
+    calc.apply("+");
+    calc.apply("-");
+    calc.apply("/");
+    calc.store(3);
+    calc.apply("x");
+
+    assertEquals(9, calc.getTop());
   }
 
 }

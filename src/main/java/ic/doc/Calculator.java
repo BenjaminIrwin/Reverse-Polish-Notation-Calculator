@@ -11,18 +11,32 @@ public class Calculator {
   }
 
   public void apply(String sign) {
-    if(sign == "+") {
+
+    if (sign == "+") {
+
       numbersEntered.push(numbersEntered.pop() + numbersEntered.pop());
-    } else if(sign == "-") {
-      numbersEntered.push(numbersEntered.pop() - numbersEntered.pop());
-    }else if(sign == "/") {
+
+    } else if (sign == "-") {
+
+      int subtrahend = numbersEntered.pop();
+      int minuend = numbersEntered.pop();
+
+      numbersEntered.push(minuend - subtrahend);
+
+    } else if (sign == "/") {
+
       int denominator = numbersEntered.pop();
       int numerator = numbersEntered.pop();
-      numbersEntered.push(numerator/denominator);
-    } else if(sign == "x") {
+      numbersEntered.push(numerator / denominator);
+
+    } else if (sign == "x") {
+
       numbersEntered.push(numbersEntered.pop() * numbersEntered.pop());
-    } else if(sign == "UNDO") {
+
+    } else if (sign == "UNDO") {
+
       numbersEntered.pop();
+
     }
   }
 
