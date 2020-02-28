@@ -24,39 +24,34 @@ public class Calculator {
 
       numbersEntered.clear();
       ui.uiUpdate(".");
-
+      return;
     }
 
     if (isEmpty() || numbersEntered.size() == 1) {
       return;
     }
 
-    switch (sign) {
-      case "+":
+    if (sign.equals("+")) {
 
-        numbersEntered.push(numbersEntered.pop() + numbersEntered.pop());
+      numbersEntered.push(numbersEntered.pop() + numbersEntered.pop());
 
-        break;
-      case "-":
+    } else if (sign == "-") {
 
-        int subtrahend = numbersEntered.pop();
-        int minuend = numbersEntered.pop();
+      int subtrahend = numbersEntered.pop();
+      int minuend = numbersEntered.pop();
 
-        numbersEntered.push(minuend - subtrahend);
+      numbersEntered.push(minuend - subtrahend);
 
-        break;
-      case "/":
+    } else if (sign.equals("/")) {
 
-        int denominator = numbersEntered.pop();
-        int numerator = numbersEntered.pop();
-        numbersEntered.push(numerator / denominator);
+      int denominator = numbersEntered.pop();
+      int numerator = numbersEntered.pop();
+      numbersEntered.push(numerator / denominator);
 
-        break;
-      case "x":
+    } else if (sign.equals("x")) {
 
-        numbersEntered.push(numbersEntered.pop() * numbersEntered.pop());
+      numbersEntered.push(numbersEntered.pop() * numbersEntered.pop());
 
-        break;
     }
 
     ui.uiUpdate(Integer.toString(numbersEntered.peek()));
