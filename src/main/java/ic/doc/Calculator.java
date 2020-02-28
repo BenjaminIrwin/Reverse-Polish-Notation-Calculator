@@ -7,8 +7,6 @@ public class Calculator {
   private Stack<Integer> numbersEntered = new Stack<>();
   private UserInterface ui;
 
-
-
   public void store(int number) {
     numbersEntered.push(number);
 
@@ -16,59 +14,43 @@ public class Calculator {
 
   }
 
-  public void apply(String sign) {
+  public void apply(String operation) {
 
-    if (sign.equals("AC")) {
+    if (operation.equals("AC")) {
 
       numbersEntered.clear();
       ui.clear();
       return;
     }
 
-    if (isEmpty() || numbersEntered.size() == 1) {
+    if (numbersEntered.empty() || numbersEntered.size() == 1) {
       return;
     }
 
-    if (sign.equals("+")) {
+    if (operation.equals("+")) {
 
       numbersEntered.push(numbersEntered.pop() + numbersEntered.pop());
 
-    } else if (sign == "-") {
+    } else if (operation.equals("-")) {
 
       int subtrahend = numbersEntered.pop();
       int minuend = numbersEntered.pop();
 
       numbersEntered.push(minuend - subtrahend);
 
-    } else if (sign.equals("/")) {
+    } else if (operation.equals("/")) {
 
       int denominator = numbersEntered.pop();
       int numerator = numbersEntered.pop();
       numbersEntered.push(numerator / denominator);
 
-    } else if (sign.equals("x")) {
+    } else if (operation.equals("x")) {
 
       numbersEntered.push(numbersEntered.pop() * numbersEntered.pop());
 
     }
 
     ui.showNumber(numbersEntered.peek());
-  }
-
-  public Stack<Integer> getNumbersEntered() {
-    return numbersEntered;
-  }
-
-  public int getTop() {
-    return numbersEntered.peek();
-  }
-
-  public void remove() {
-    numbersEntered.pop();
-  }
-
-  public boolean isEmpty() {
-    return numbersEntered.isEmpty();
   }
 
   public void addObserver(UserInterface ui) {

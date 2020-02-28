@@ -13,9 +13,9 @@ public class CalculatorController {
 
   public CalculatorController() {
     calc = new Calculator();
-    CalculatorView calcUI = new CalculatorView(this);
-    calc.addObserver(calcUI);
-    calcUI.display();
+    CalculatorView uiCalc = new CalculatorView(this);
+    calc.addObserver(uiCalc);
+    uiCalc.display();
   }
 
   public static void main(String[] args) {
