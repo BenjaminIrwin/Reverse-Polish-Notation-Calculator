@@ -5,16 +5,14 @@ import java.util.Stack;
 public class Calculator {
 
   private Stack<Integer> numbersEntered = new Stack<>();
-  public UserInterface ui;
+  private UserInterface ui;
 
-  public Calculator(UserInterface ui) {
-    this.ui = ui;
-  }
+
 
   public void store(int number) {
     numbersEntered.push(number);
 
-    ui.uiUpdate(Integer.toString(numbersEntered.peek()));
+    ui.showNumber(numbersEntered.peek());
 
   }
 
@@ -23,7 +21,7 @@ public class Calculator {
     if (sign.equals("AC")) {
 
       numbersEntered.clear();
-      ui.uiUpdate(".");
+      ui.clear();
       return;
     }
 
@@ -54,7 +52,7 @@ public class Calculator {
 
     }
 
-    ui.uiUpdate(Integer.toString(numbersEntered.peek()));
+    ui.showNumber(numbersEntered.peek());
   }
 
   public Stack<Integer> getNumbersEntered() {
@@ -73,4 +71,7 @@ public class Calculator {
     return numbersEntered.isEmpty();
   }
 
+  public void addObserver(UserInterface ui) {
+    this.ui = ui;
+  }
 }

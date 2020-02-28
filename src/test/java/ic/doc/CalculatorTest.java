@@ -8,41 +8,45 @@ import static org.junit.Assert.assertTrue;
 import java.util.Stack;
 
 import org.jmock.Expectations;
-import org.jmock.Mockery;
+import org.jmock.integration.junit4.JUnitRuleMockery;
+import org.junit.Rule;
 import org.junit.Test;
 
 public class CalculatorTest {
 
-  Mockery context = new Mockery();
+  @Rule
+  public JUnitRuleMockery context = new JUnitRuleMockery();
+
   UserInterface ui = context.mock(UserInterface.class);
 
   @Test
   public void storesAValue() {
 
     context.checking(new Expectations() {{
-      ignoring(ui);
+      exactly(1).of(ui).showNumber(24);
     }});
 
-    Calculator calc = new Calculator(ui);
+    Calculator calc = new Calculator();
+    calc.addObserver(ui);
     calc.store(24);
 
-    Stack<Integer> stack = new Stack<>();
-    stack.push(24);
-
-    assertThat(calc.getNumbersEntered(), is(stack));
   }
 
   @Test
   public void storeThreeAndAllClear() {
 
     context.checking(new Expectations() {{
-      ignoring(ui);
+      exactly(1).of(ui).showNumber(2);
+      exactly(1).of(ui).showNumber(3);
+      exactly(1).of(ui).showNumber(5);
+      exactly(1).of(ui).clear();
+
     }});
 
-    Calculator calc = new Calculator(ui);
-    calc.store(24);
-    calc.store(30);
-    calc.store(33);
+    Calculator calc = new Calculator();
+    calc.store(2);
+    calc.store(3);
+    calc.store(5);
 
     calc.apply("AC");
 
@@ -53,16 +57,16 @@ public class CalculatorTest {
   public void addTwoValues() {
 
     context.checking(new Expectations() {{
-      ignoring(ui);
+      exactly(1).of(ui).showNumber(2);
+      exactly(1).of(ui).showNumber(3);
+      exactly(1).of(ui).showNumber(5);
     }});
 
-    Calculator calc = new Calculator(ui);
-    calc.store(24);
-    calc.store(30);
+    Calculator calc = new Calculator();
+    calc.store(2);
+    calc.store(3);
 
     calc.apply("+");
-
-    assertEquals(54, calc.getTop());
   }
 
   @Test
@@ -72,7 +76,7 @@ public class CalculatorTest {
       ignoring(ui);
     }});
 
-    Calculator calc = new Calculator(ui);
+    Calculator calc = new Calculator();
     calc.store(60);
     calc.store(30);
 
@@ -88,7 +92,7 @@ public class CalculatorTest {
       ignoring(ui);
     }});
 
-    Calculator calc = new Calculator(ui);
+    Calculator calc = new Calculator();
     calc.store(24);
     calc.store(2);
 
@@ -104,7 +108,7 @@ public class CalculatorTest {
       ignoring(ui);
     }});
 
-    Calculator calc = new Calculator(ui);
+    Calculator calc = new Calculator();
     calc.store(24);
     calc.store(2);
 
@@ -120,7 +124,7 @@ public class CalculatorTest {
       ignoring(ui);
     }});
 
-    Calculator calc = new Calculator(ui);
+    Calculator calc = new Calculator();
     calc.store(15);
     calc.store(7);
     calc.store(1);
@@ -141,7 +145,7 @@ public class CalculatorTest {
       ignoring(ui);
     }});
 
-    Calculator calc = new Calculator(ui);
+    Calculator calc = new Calculator();
 
     calc.apply("+");
     calc.apply("-");

@@ -1,13 +1,9 @@
 package ic.doc;
 
-import javax.swing.JPanel;
-
 public interface UserInterface {
-  void display(GuiApp calculatorApp);
+  void display();
 
-  void makeSignButtons(JPanel panel, GuiApp calculatorApp);
+  void showNumber(Integer toDisplay);
 
-  void makeNumberButtons(JPanel panel, GuiApp calculatorApp);
-
-  void uiUpdate(String toDisplay);
+  void clear();
 }

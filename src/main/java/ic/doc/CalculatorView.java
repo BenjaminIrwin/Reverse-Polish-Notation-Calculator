@@ -2,6 +2,7 @@ package ic.doc;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,8 +15,14 @@ public class CalculatorView implements UserInterface {
   String[] signs = {"+", "-", "/", "x", "AC"};
   JTextField textField = new JTextField(10);
 
+  private CalculatorController calculatorApp;
+
+  public CalculatorView(CalculatorController calculatorApp) {
+    this.calculatorApp = calculatorApp;
+  }
+
   @Override
-  public void display(GuiApp calculatorApp) {
+  public void display() {
     JFrame frame = new JFrame("Example App");
     frame.setSize(300, 200);
 
@@ -31,45 +38,37 @@ public class CalculatorView implements UserInterface {
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
   }
 
-  @Override
-  public void makeSignButtons(JPanel panel, GuiApp calculatorApp) {
+  public void makeSignButtons(JPanel panel, CalculatorController calculatorApp) {
     for (String s : signs) {
       JButton button = new JButton(s);
 
-      button.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent actionEvent) {
-          calculatorApp.interact(s);
-        }
-      });
+      button.addActionListener(actionEvent -> calculatorApp.respondTo(s));
 
       panel.add(button);
 
     }
   }
 
-  @Override
-  public void makeNumberButtons(JPanel panel, GuiApp calculatorApp) {
+  public void makeNumberButtons(JPanel panel, CalculatorController calculatorApp) {
 
     for (int n = 1; n <= 9; n++) {
       String number = Integer.toString(n);
 
       JButton button = new JButton(number);
-      button.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent actionEvent) {
-          calculatorApp.interact(number);
-        }
-      });
+      button.addActionListener(actionEvent -> calculatorApp.respondTo(number));
 
       panel.add(button);
-
     }
   }
 
   @Override
-  public void uiUpdate(String toDisplay) {
-    textField.setText(toDisplay);
+  public void showNumber(Integer toDisplay) {
+    textField.setText(String.valueOf(toDisplay));
+  }
+
+  @Override
+  public void clear() {
+    textField.setText("");
   }
 
 }
