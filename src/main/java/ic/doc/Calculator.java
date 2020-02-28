@@ -4,57 +4,62 @@ import java.util.Stack;
 
 public class Calculator {
 
-  private Stack<Integer> numbersEntered = new Stack<Integer>();
+  private Stack<Integer> numbersEntered = new Stack<>();
   public UserInterface ui;
 
-  public Calculator (UserInterface ui) {
+  public Calculator(UserInterface ui) {
     this.ui = ui;
   }
 
   public void store(int number) {
     numbersEntered.push(number);
 
-    ui.updateUI(Integer.toString(numbersEntered.peek()));
+    ui.uiUpdate(Integer.toString(numbersEntered.peek()));
 
   }
 
   public void apply(String sign) {
 
-    if (sign == "AC") {
+    if (sign.equals("AC")) {
 
       numbersEntered.clear();
-      ui.updateUI(".");
+      ui.uiUpdate(".");
 
     }
 
-    if(isEmpty() || numbersEntered.size() == 1) {
+    if (isEmpty() || numbersEntered.size() == 1) {
       return;
     }
 
-    if (sign == "+") {
+    switch (sign) {
+      case "+":
 
-      numbersEntered.push(numbersEntered.pop() + numbersEntered.pop());
+        numbersEntered.push(numbersEntered.pop() + numbersEntered.pop());
 
-    } else if (sign == "-") {
+        break;
+      case "-":
 
-      int subtrahend = numbersEntered.pop();
-      int minuend = numbersEntered.pop();
+        int subtrahend = numbersEntered.pop();
+        int minuend = numbersEntered.pop();
 
-      numbersEntered.push(minuend - subtrahend);
+        numbersEntered.push(minuend - subtrahend);
 
-    } else if (sign == "/") {
+        break;
+      case "/":
 
-      int denominator = numbersEntered.pop();
-      int numerator = numbersEntered.pop();
-      numbersEntered.push(numerator / denominator);
+        int denominator = numbersEntered.pop();
+        int numerator = numbersEntered.pop();
+        numbersEntered.push(numerator / denominator);
 
-    } else if (sign == "x") {
+        break;
+      case "x":
 
-      numbersEntered.push(numbersEntered.pop() * numbersEntered.pop());
+        numbersEntered.push(numbersEntered.pop() * numbersEntered.pop());
 
+        break;
     }
 
-    ui.updateUI(Integer.toString(numbersEntered.peek()));
+    ui.uiUpdate(Integer.toString(numbersEntered.peek()));
   }
 
   public Stack<Integer> getNumbersEntered() {

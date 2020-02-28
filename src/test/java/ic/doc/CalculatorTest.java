@@ -1,13 +1,15 @@
 package ic.doc;
 
-import org.jmock.Expectations;
-import org.jmock.Mockery;
-import org.junit.Test;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Stack;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import org.jmock.Expectations;
+import org.jmock.Mockery;
+import org.junit.Test;
 
 public class CalculatorTest {
 
@@ -24,7 +26,7 @@ public class CalculatorTest {
     Calculator calc = new Calculator(ui);
     calc.store(24);
 
-    Stack<Integer> stack = new Stack<Integer>();
+    Stack<Integer> stack = new Stack<>();
     stack.push(24);
 
     assertThat(calc.getNumbersEntered(), is(stack));

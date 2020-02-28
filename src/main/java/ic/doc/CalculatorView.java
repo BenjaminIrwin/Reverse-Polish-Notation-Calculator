@@ -1,8 +1,13 @@
 package ic.doc;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
 
 public class CalculatorView implements UserInterface {
 
@@ -63,7 +68,7 @@ public class CalculatorView implements UserInterface {
   }
 
   @Override
-  public void updateUI(String toDisplay) {
+  public void uiUpdate(String toDisplay) {
     textField.setText(toDisplay);
   }
 

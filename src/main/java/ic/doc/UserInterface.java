@@ -1,6 +1,6 @@
 package ic.doc;
 
-import javax.swing.*;
+import javax.swing.JPanel;
 
 public interface UserInterface {
   void display(GuiApp calculatorApp);
@@ -9,5 +9,5 @@ public interface UserInterface {
 
   void makeNumberButtons(JPanel panel, GuiApp calculatorApp);
 
-  void updateUI(String toDisplay);
+  void uiUpdate(String toDisplay);
 }
