@@ -21,6 +21,7 @@ public class Calculator {
       numbersEntered.clear();
       ui.clear();
       return;
+
     }
 
     if (numbersEntered.empty() || numbersEntered.size() == 1) {

@@ -30,15 +30,15 @@ public class CalculatorView implements UserInterface {
 
     panel.add(textField);
 
-    makeNumberButtons(panel, calculatorApp);
-    makeSignButtons(panel, calculatorApp);
+    makeNumberButtons(panel);
+    makeSignButtons(panel);
 
     frame.add(panel);
     frame.setVisible(true);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
   }
 
-  public void makeSignButtons(JPanel panel, CalculatorController calculatorApp) {
+  public void makeSignButtons(JPanel panel) {
     for (String s : signs) {
       JButton button = new JButton(s);
 
@@ -49,7 +49,7 @@ public class CalculatorView implements UserInterface {
     }
   }
 
-  public void makeNumberButtons(JPanel panel, CalculatorController calculatorApp) {
+  public void makeNumberButtons(JPanel panel) {
 
     for (int n = 1; n <= 9; n++) {
       String number = Integer.toString(n);
