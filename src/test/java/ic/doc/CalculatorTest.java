@@ -1,5 +1,7 @@
 package ic.doc;
 
+import org.jmock.Expectations;
+import org.jmock.Mockery;
 import org.junit.Test;
 
 import java.util.Stack;
@@ -9,9 +11,17 @@ import static org.junit.Assert.*;
 
 public class CalculatorTest {
 
+  Mockery context = new Mockery();
+  UserInterface ui = context.mock(UserInterface.class);
+
   @Test
   public void storesAValue() {
-    Calculator calc = new Calculator();
+
+    context.checking(new Expectations() {{
+      ignoring(ui);
+    }});
+
+    Calculator calc = new Calculator(ui);
     calc.store(24);
 
     Stack<Integer> stack = new Stack<Integer>();
@@ -22,7 +32,12 @@ public class CalculatorTest {
 
   @Test
   public void storeThreeAndAllClear() {
-    Calculator calc = new Calculator();
+
+    context.checking(new Expectations() {{
+      ignoring(ui);
+    }});
+
+    Calculator calc = new Calculator(ui);
     calc.store(24);
     calc.store(30);
     calc.store(33);
@@ -34,7 +49,12 @@ public class CalculatorTest {
 
   @Test
   public void addTwoValues() {
-    Calculator calc = new Calculator();
+
+    context.checking(new Expectations() {{
+      ignoring(ui);
+    }});
+
+    Calculator calc = new Calculator(ui);
     calc.store(24);
     calc.store(30);
 
@@ -45,7 +65,12 @@ public class CalculatorTest {
 
   @Test
   public void subtractWithTwoValues() {
-    Calculator calc = new Calculator();
+
+    context.checking(new Expectations() {{
+      ignoring(ui);
+    }});
+
+    Calculator calc = new Calculator(ui);
     calc.store(60);
     calc.store(30);
 
@@ -56,7 +81,12 @@ public class CalculatorTest {
 
   @Test
   public void multiplyTwoValues() {
-    Calculator calc = new Calculator();
+
+    context.checking(new Expectations() {{
+      ignoring(ui);
+    }});
+
+    Calculator calc = new Calculator(ui);
     calc.store(24);
     calc.store(2);
 
@@ -67,7 +97,12 @@ public class CalculatorTest {
 
   @Test
   public void divideWithTwoValues() {
-    Calculator calc = new Calculator();
+
+    context.checking(new Expectations() {{
+      ignoring(ui);
+    }});
+
+    Calculator calc = new Calculator(ui);
     calc.store(24);
     calc.store(2);
 
@@ -78,7 +113,12 @@ public class CalculatorTest {
 
   @Test
   public void addSubtractDivideMultiply() {
-    Calculator calc = new Calculator();
+
+    context.checking(new Expectations() {{
+      ignoring(ui);
+    }});
+
+    Calculator calc = new Calculator(ui);
     calc.store(15);
     calc.store(7);
     calc.store(1);
@@ -94,7 +134,12 @@ public class CalculatorTest {
 
   @Test
   public void arithmeticWithStackSizeZeroAndOneDoesNothing() {
-    Calculator calc = new Calculator();
+
+    context.checking(new Expectations() {{
+      ignoring(ui);
+    }});
+
+    Calculator calc = new Calculator(ui);
 
     calc.apply("+");
     calc.apply("-");

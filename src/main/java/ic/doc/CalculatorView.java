@@ -4,12 +4,13 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class UI {
+public class CalculatorView implements UserInterface {
 
   String[] signs = {"+", "-", "/", "x", "AC"};
   JTextField textField = new JTextField(10);
 
-  public void display() {
+  @Override
+  public void display(GuiApp calculatorApp) {
     JFrame frame = new JFrame("Example App");
     frame.setSize(300, 200);
 
@@ -17,22 +18,23 @@ public class UI {
 
     panel.add(textField);
 
-    makeNumberButtons(panel);
-    makeSignButtons(panel);
+    makeNumberButtons(panel, calculatorApp);
+    makeSignButtons(panel, calculatorApp);
 
     frame.add(panel);
     frame.setVisible(true);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
   }
 
-  private void makeSignButtons(JPanel panel) {
+  @Override
+  public void makeSignButtons(JPanel panel, GuiApp calculatorApp) {
     for (String s : signs) {
       JButton button = new JButton(s);
 
       button.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-          calc.apply(s);
+          calculatorApp.interact(s);
         }
       });
 
@@ -41,17 +43,17 @@ public class UI {
     }
   }
 
-  private void makeNumberButtons(JPanel panel) {
+  @Override
+  public void makeNumberButtons(JPanel panel, GuiApp calculatorApp) {
 
     for (int n = 1; n <= 9; n++) {
       String number = Integer.toString(n);
 
       JButton button = new JButton(number);
-      int finalN = n;
       button.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-          calc.store(finalN);
+          calculatorApp.interact(number);
         }
       });
 
@@ -60,8 +62,9 @@ public class UI {
     }
   }
 
-  public void updateUI(String numberToDisplay) {
-    textField.setText(numberToDisplay);
+  @Override
+  public void updateUI(String toDisplay) {
+    textField.setText(toDisplay);
   }
 
 }
